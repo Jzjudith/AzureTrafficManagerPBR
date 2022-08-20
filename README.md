@@ -1,4 +1,4 @@
-# jd-dev-kab
+# jd-dev-lab
 Azure traffic manager performance based routing
 #resources 
 Traffic manager
