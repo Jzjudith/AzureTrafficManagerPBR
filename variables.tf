@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "the name of the resource group"
   type        = string
-  default     = "jd-dev-lab-rg"
+  default     = "dev-assesment-lab-rg"
 }
 
 variable "location" {
