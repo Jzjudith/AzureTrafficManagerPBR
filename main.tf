@@ -183,7 +183,7 @@ resource "azurerm_network_security_group" "nsg2" {
     protocol                   = "Tcp"
     source_address_prefix      = "10.0.0.0/16"
     source_port_range          = "*"
-    destination_address_prefix = "Internet" 
+    destination_address_prefix = "Internet"
     destination_port_range     = "443"
   }
 
@@ -205,6 +205,42 @@ resource "azurerm_subnet_network_security_group_association" "main2" {
   network_security_group_id = azurerm_network_security_group.nsg2.id
 }
 
+resource "azurerm_public_ip" "pipeus01" {
+  name                = "pip-eastus1"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  sku                 = "Standard"
+  allocation_method   = "Static"
+
+}
+
+resource "azurerm_public_ip" "pipeus02" {
+  name                = "pip-eastus2"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  sku                 = "Standard"
+  allocation_method   = "Static"
+
+}
+
+resource "azurerm_public_ip" "pipuks01" {
+  name                = "pip-uksouth1"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = "UK South"
+  sku                 = "Standard"
+  allocation_method   = "Static"
+
+}
+
+
+resource "azurerm_public_ip" "pipuks02" {
+  name                = "pip-uksouth2"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = "UK South"
+  sku                 = "Standard"
+  allocation_method   = "Static"
+
+}
 #create network interface
 resource "azurerm_network_interface" "nic01" {
   name                = "eastus-nic01"
@@ -215,6 +251,7 @@ resource "azurerm_network_interface" "nic01" {
     name                          = "eastus-ipconfig"
     subnet_id                     = azurerm_subnet.sub1.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pipeus01.id
   }
 }
 
@@ -227,6 +264,7 @@ resource "azurerm_network_interface" "nic02" {
     name                          = "eastus-ipconfig2"
     subnet_id                     = azurerm_subnet.sub1.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pipeus02.id
   }
 }
 
@@ -239,6 +277,7 @@ resource "azurerm_network_interface" "nic03" {
     name                          = "uksouth-ipconfig"
     subnet_id                     = azurerm_subnet.sub2.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pipuks01.id
   }
 }
 
@@ -251,6 +290,7 @@ resource "azurerm_network_interface" "nic04" {
     name                          = "uksouth-ipconfig2"
     subnet_id                     = azurerm_subnet.sub2.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pipuks02.id
   }
 }
 
