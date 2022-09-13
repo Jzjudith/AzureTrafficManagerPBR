@@ -1,5 +1,4 @@
-# jd-dev-lab
-Azure traffic manager performance based routing
+# Azure traffic manager performance based routing
 #resources 
 Traffic manager
 Application gateways (2)
