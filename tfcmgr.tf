@@ -1,13 +1,3 @@
-# Create Traffic Manager  Profile
-# resource "random_id" "server" {
-#   keepers = {
-#     azi_id = 1
-#   }
-
-#   byte_length = 8
-# }
-
-
 resource "azurerm_traffic_manager_profile" "global" {
   name                   = "dev-lab-tfc-mgr"
   resource_group_name    = azurerm_resource_group.main.name
